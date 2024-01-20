@@ -135,3 +135,77 @@ public class Solution {
 
 ~~~
 
+
+
+给你一个字符串数组 `words` 和一个字符 `separator` ，请你按 `separator` 拆分 `words` 中的每个字符串。
+
+返回一个由拆分后的新字符串组成的字符串数组，**不包括空字符串** 。
+
+~~~java
+/*
+	复习了String和StringBuilder的区别
+	String（不可变）：String 类是不可变的。一旦创建了一个 String 对象，它的值就不能被修改。任何对字符串的操作，比如连接、替换等，都会创建一个新的字符串对象。String的创建方式有两种 一种是字符变量直接赋值，这种使用到了java中的字符串常量池，在字符串常量池中创建一个对象。 另一种是使用new String("...")这种方法会创建对象还会在字符串常量池中创建对象。（都是在字符串常量池没有重复值的情况下）
+	StringBuilder（可变）：StringBuilder 类是可变的，允许在已有对象的基础上进行修改，而不是创建新的对象。这使得在频繁修改字符串时，StringBuilder 比 String 具有更好的性能。
+	
+	String 类的常用方法：
+        charAt(int index): 返回指定索引位置的字符。
+        length(): 返回字符串的长度。
+        substring(int beginIndex): 返回从指定索引开始到字符串末尾的子字符串。
+        substring(int beginIndex, int endIndex): 返回从指定开始索引到结束索引的子字符串。
+        equals(Object anObject): 比较字符串是否相等。
+        equalsIgnoreCase(String anotherString): 比较字符串是否相等，忽略大小写。
+        indexOf(String str): 返回指定子字符串在字符串中第一次出现的位置。
+        lastIndexOf(String str): 返回指定子字符串在字符串中最后一次出现的位置。
+        startsWith(String prefix): 判断字符串是否以指定的前缀开始。
+        endsWith(String suffix): 判断字符串是否以指定的后缀结束。
+        toUpperCase(): 将字符串转换为大写。
+        toLowerCase(): 将字符串转换为小写。
+        trim(): 去除字符串两端的空白字符。
+        
+    StringBuilder 类的常用方法：
+        append(String str): 在字符串末尾追加指定的字符串。
+        insert(int offset, String str): 在指定位置插入字符串。
+        delete(int start, int end): 删除指定范围内的字符。
+        deleteCharAt(int index): 删除指定位置的字符。
+        reverse(): 反转字符串。
+        length(): 返回字符串的长度。
+        charAt(int index): 返回指定索引位置的字符。
+        substring(int start): 返回从指定索引开始到字符串末尾的子字符串。
+        substring(int start, int end): 返回从指定开始索引到结束索引的子字符串。
+        indexOf(String str): 返回指定子字符串在字符串中第一次出现的位置。
+        lastIndexOf(String str): 返回指定子字符串在字符串中最后一次出现的位置.
+        replace(int start, int end, String str): 用指定字符串替换指定范围内的字符。
+        
+        
+        StringBuilder s = "a";
+        StringBuilder转化为String的方法:s.toString();
+*/
+class Solution {
+    public List<String> splitWordsBySeparator(List<String> words, char separator) {
+
+        List<String> list = new ArrayList<String>();
+        
+        for (String word : words){
+            StringBuilder s = new StringBuilder();
+            int length = word.length();
+            for (int i = 0; i < length; i ++ ){
+                char c = word.charAt(i);
+                if(c == separator){
+                    if(s.length() > 0){
+                        list.add(s.toString());
+                        s.setLength(0);
+                    }
+                }else{
+                    s.append(c);
+                }
+            }
+            if(s.length() > 0){
+                list.add(s.toString());
+            }
+        }
+        return list;
+    }
+}
+
+~~~
+
